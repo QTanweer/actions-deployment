@@ -1,0 +1,14 @@
+server {
+    listen 80;
+    server_name your_domain_or_IP;
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location /static/ {
+        root /home/deployer/your-repo;
+    }
+
+    location / {
+        include proxy_params;
+        proxy_pass http://unix:/home/deployer/your-repo/yourapp.sock;
+    }
+}
